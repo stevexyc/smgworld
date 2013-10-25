@@ -1,0 +1,588 @@
+[pl_raw]<!DOCTYPE html>
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">		
+<style>.fullwidth #column-main .mcolumn-pad {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.links { text-align:center; font-family: Lato, Calibri, Arial, sans-serif; padding-bottom:30px !important;}
+.links a { padding:0 10px; text-decoration:underline; display:block;}
+.links .link { color:#22f; }
+.links .gcallink { color: #CC0000;}
+.links .icslink { color:#FF7900;}
+.content .content-pad { padding: 0px }
+.calendar-holder {
+    background: #f7f7f7;
+    min-height: 800px;
+    position: relative;
+}
+.calendar-holder,
+.thead,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-title, #modal {
+    font-family: 'Lato',Calibri,Arial,sans-serif;
+    font-weight: 300;
+}
+.custom-month-year { margin: 0 !important }
+#calendar { min-height: 700px }
+.calendar-holder {
+    padding: 0;
+    margin: 0;
+}
+#modal {
+    background: #fff;
+    position: fixed;
+    top: 30%;
+max-height:70%;
+    width: 500px;
+    left: 50%;
+    margin-left: -250px;
+    z-index: 1000;
+    padding: 0;
+    line-height: 1.5;
+    display: none;
+    -webkit-box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.75);
+    box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.75);
+overflow:auto;
+}
+#close-modal {
+display: none;
+z-index: 5000;
+position: fixed;
+top: 30%;
+left: 50%;
+margin-left: 230px;
+font-size: 25px;
+margin-top: -20px;
+background:#222;
+    background: rgba(0,0,0,0.5);
+    width: 40px;
+    line-height: 40px;
+    border-radius: 100%;
+    color: white;
+    border: none;
+}
+#modal h1,
+#modal h2 {
+    font-weight: normal;
+    padding-top: 10px;
+    margin: 8px 0;
+}
+#modal h1 { padding-top:40px !important; }
+#modal h1 a {
+    color: #00f;
+    text-decoration: underline;
+}
+
+#modal >p {
+    /*text-indent: 2em;*/
+    /*max-height: none;
+    overflow: auto;*/
+}
+#modal >a {
+    color: #00f;
+    display: block;
+    text-align: center;
+    font-size: 1.3em;
+    padding-top: 20px;
+}
+#modal h1,
+#modal h2,
+#modal > p { padding: 0 30px }
+#modal > .message { padding-top:20px; }
+@media screen and (max-width:550px) { 
+	#modal {
+	    width: 100%;
+	    left: 0;
+	    margin-left: 0;
+	    top: 40%;
+        bottom: 0;
+	    padding: 20px 0 50px 0;
+	    overflow: auto;
+	    -webkit-overflow-scrolling: touch;
+	}
+	#close-modal {
+	    top: 40%;
+left:auto;
+	    right: 0;
+        width: auto;
+        line-height: 30px;
+	    border-radius: 0;
+margin:0;
+
+
+	}
+	#modal h1 {
+	    font-size: 20px;
+	    margin: 8px 0;
+	}
+	#modal h2 {
+	    font-size: 15px;
+	    margin: 5px 0;
+	}
+	/*#modal >p { max-height: none }*/
+}
+.fc-calendar .fc-body {
+    width: 100%;
+    height: 100%;
+}
+.fc-calendar .fc-row { border-bottom: 1px solid #ddd }
+.fc-four-rows .fc-row { height: 25% }
+.fc-calendar .fc-row:last-child { border-bottom: none }
+.fc-five-rows .fc-row { height: 19.9% }
+.fc-six-rows .fc-row { height: 16.66% }
+.fc-calendar .fc-row >div,
+.fc-calendar .fc-head >div {
+    float: left;
+    height: 100%;
+    width: 14%;
+    position: relative;
+}
+.ie9 .fc-calendar .fc-row >div,
+.ie9 .fc-calendar .fc-head >div { width: 14% }
+.fc-calendar .fc-row >div {
+    overflow: auto;
+    border-right: 1px solid #ddd;
+}
+.fc-calendar .fc-row > div:last-child,
+.fc-calendar .fc-head > div:last-child { border-right: none }
+.fc-calendar .fc-row >div >div { margin: 35px 4px 0 4px }
+.fc-calendar .fc-head >div { text-align: center }
+.fc-calendar .fc-row >div >span.fc-date {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    font-size: 20px;
+    line-height: 20px;
+    color: #ddd;
+    bottom: 5px;
+    right: 5px;
+    text-align: left;
+}
+.fc-calendar .fc-row >div >span.fc-weekday {
+    padding-left: 5px;
+    display: none;
+}
+.fc-calendar-container {
+    bottom: 0;
+    width: 100%;
+    top: 80px;
+    position: absolute;
+}
+.custom-header {
+    background: #A71930;
+    padding: 10px 20px 10px 40px;
+}
+.custom-header h3 >span {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+.custom-header h3 {
+    color: #ddd;
+    color: rgba(255,255,255,0.9);
+    font-size: 1.4em;
+    font-weight: 300;
+    line-height: 30px;
+}
+.custom-header nav {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.custom-header nav span, .custom-header nav a  {
+    float: left;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.3);
+    font-size: 22px;
+    line-height: 30px;
+    border-radius: 3px 3px 3px 3px;
+    color: #fff;
+    text-align: center;
+    margin-left: 20px;
+}
+#add-month-gcal, #add-month-ics { width:auto; font-size:0.6em; line-height:20px;height:20px; text-decoration:none; text-transform: uppercase; margin-top:3px;padding:2px 5px;}
+
+#add-month-ics { clear:none;}
+
+.custom-header nav span:hover, .custom-header nav a:hover { background: rgba(255,255,255,0.5) }
+.fc-calendar {
+    background: rgba(255,255,255,0.1);
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    position: absolute;
+}
+.fc-calendar .fc-head {
+    position: absolute;
+    width: 100%;
+    top: -30px;
+    background: #efefef;
+    color: black;
+    height: 30px;
+    line-height: 30px;
+}
+.fc-calendar .fc-head >div {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+.fc-calendar .fc-row >div >span.fc-date {
+    color: #313131;
+    font-size: 26px;
+    top: 10px;
+    left: 10px;
+}
+.fc-calendar .fc-row >div.fc-today:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,0.15)),to(rgba(0,0,0,0.25))),-webkit-gradient(linear,left top,right bottom,color-stop(0,rgba(255,255,255,0)),color-stop(0.5,rgba(255,255,255,.15)),color-stop(0.501,rgba(255,255,255,0)),color-stop(1,rgba(255,255,255,0)));
+    background: -moz-linear-gradient(top,rgba(255,255,255,0.15),rgba(0,0,0,0.25)),-moz-linear-gradient(left top,rgba(255,255,255,0),rgba(255,255,255,0.15) 50%,rgba(255,255,255,0) 50%,rgba(255,255,255,0));
+    background: -o-linear-gradient(top,rgba(255,255,255,0.15),rgba(0,0,0,0.25)),-o-linear-gradient(left top,rgba(255,255,255,0),rgba(255,255,255,0.15) 50%,rgba(255,255,255,0) 50%,rgba(255,255,255,0));
+    background: -ms-linear-gradient(top,rgba(255,255,255,0.15),rgba(0,0,0,0.25)),-ms-linear-gradient(left top,rgba(255,255,255,0),rgba(255,255,255,0.15) 50%,rgba(255,255,255,0) 50%,rgba(255,255,255,0));
+    background: linear-gradient(top,rgba(255,255,255,0.15),rgba(0,0,0,0.25)),linear-gradient(left top,rgba(255,255,255,0),rgba(255,255,255,0.15) 50%,rgba(255,255,255,0) 50%,rgba(255,255,255,0));
+}
+.fc-calendar .fc-row >div >div { margin-top: 35px }
+.fc-calendar .fc-row >div >div a,
+.fc-calendar .fc-row >div >div span {
+    text-decoration: none;
+    white-space: nowrap;
+    color: #000;
+    font-weight: normal;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: block;
+    padding: 3px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+    background: #efefef;
+}
+.fc-calendar .fc-row >div >div time { font-weight: bold }
+.fc-calendar .fc-row >div >div a:hover {
+    background: #A71930;
+    color: #efefef;
+}
+.links { margin:0; }
+
+
+
+@media screen and (max-width:660px) {
+
+	#add-month-ics, #add-month-gcal {
+		position:absolute;top:30px;
+		white-space:nowrap;
+		right:0;
+
+	}
+	#add-month-gcal { right:130px;}
+	.fc-calendar-container {
+		position:;
+	}
+	.custom-header { padding-bottom:34px;}
+}
+@media screen and (max-width:480px) {
+    #custom-year {position: absolute;}
+	.custom-header { padding: 10px 10px 70px 10px;}
+	#add-month-gcal, #add-month-ics {top:45px;right:20px;left:20px;margin-left:0;}
+	#add-month-ics { top:75px;margin-left:0;}
+	.custom-header nav { position:static !important;float:right;}
+	.custom-header nav span:first-child { margin:0;}
+	.custom-header nav span { float:left;}
+
+}
+@media screen and (max-width:880px) { 
+
+	.fc-calendar-container,
+	.fc-calendar,
+	.fc-calendar .fc-head {
+	    position: static;
+	    right:auto;
+	}
+	.fc-calendar .fc-row,
+	.ie9 .fc-calendar .fc-row >div,
+	.fc-calendar .fc-row >div {
+	    height: auto;
+	    width: 100%;
+	    border: none;
+	}
+	.fc-calendar .fc-row >div {
+	    float: none;
+	    min-height: 33px;
+	    padding: 10px 0;
+	    border-radius: 0 !important;
+	    box-shadow: inset 0 -1px #ddd !important;
+	}
+	.fc-calendar .fc-row >div >span.fc-weekday {
+	    position: absolute;
+	    left: 10px;
+	    top: 30px;
+	    width: 40px;
+	    text-align: center;
+	}
+	.fc-calendar .fc-row >div >span.fc-date {
+	    position: absolute;
+	    left: 10px;
+	    top: 10px;
+	    width: 40px;
+	    text-align: center;
+	}
+	.fc-calendar .fc-row >div:empty {
+	    min-height: 0;
+	    height: 0;
+	    padding: 0;
+	}
+	.fc-calendar .fc-head { display: none }
+	.fc-calendar .fc-row >div >span.fc-weekday {
+	    padding-left: 0;
+	    display: block;
+	    color: #313131;
+	    text-transform: uppercase;
+	}
+	.fc-calendar .fc-row >div >div {
+	    margin-top: 0;
+	    padding-left: 60px;
+	    padding-right: 30px;
+	    display: block;
+	}
+	.fc-calendar .fc-row >div.fc-today { background: rgba(255,255,255,0.7) }
+	.fc-calendar .fc-row >div.fc-today:after { display: none }
+
+
+}</style>
+
+<div class="calendar-holder">
+	<div class="custom-calendar-wrap custom-calendar-full">
+		<div class="custom-header clearfix">
+			<h3 class="custom-month-year">
+				<span id="custom-month" class="custom-month"></span>
+				<span id="custom-year" class="custom-year"></span>
+
+				<nav>
+					<a href="https://www.google.com/calendar/render?cid=islcfpbthu89o4b7cggfh73hperc5tmc%40import.calendar.google.com" id="add-month-gcal">+ Google Calendar</a>
+					<a href="http://smgapps.bu.edu/smgnet/smgCalendarU/smgCal/smgCalOutlook.cfm" id="add-month-ics">+ Outlook (ICS)</a>
+					<span id="custom-prev" class="icon-caret-left"></span>
+					<span id="custom-next" class="icon-caret-right"></span>
+				</nav>
+			</h3>
+		</div>
+		<div id="calendar" class="fc-calendar-container"></div>
+	</div>
+</div>
+<button id="close-modal" class="icon-remove"></button>
+<div id="modal">
+	
+	<h1></h1>
+	<h2><strong>Time:</strong> <span class="time"></span></h2>
+<h2><strong>Date:</strong> <span class="date"></span></h2>
+	<h2><strong>Location:</strong> <span class="loc"></span></h2>
+	<p class="message"></p>
+	<p class="links">
+        <a target="_blank" class="gcallink">+ Google Calendar</a>
+        <a target="_blank" class="icslink">+ Outlook (ICS)</a>
+		<a target="_blank" class="link">Permalink</a>
+	</p>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.1.0/es5-shim.min.js"></script>
+
+<script type="text/javascript">
+<!--
+// above line is necessary for wordpress
+// CALENDARIO, MINIFIED:
+(function(a,b,c){"use strict",a.Calendario=function(b,c){this.$el=a(c),this._init(b)},a.Calendario.defaults={weeks:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],weekabbrs:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],months:["January","February","March","April","May","June","July","August","September","October","November","December"],monthabbrs:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],displayWeekAbbr:!1,displayMonthAbbr:!1,startIn:1,onDayClick:function(a,b,c){return!1}},a.Calendario.prototype={_init:function(b){this.options=a.extend(!0,{},a.Calendario.defaults,b),this.today=new Date,this.month=isNaN(this.options.month)||this.options.month==null?this.today.getMonth():this.options.month-1,this.year=isNaN(this.options.year)||this.options.year==null?this.today.getFullYear():this.options.year,this.caldata=this.options.caldata||{},this._generateTemplate(),this._initEvents()},_initEvents:function(){var b=this;this.$el.on("click.calendario","div.fc-row > div",function(){var c=a(this),d=c.index(),e=c.children("div"),f={day:c.children("span.fc-date").text(),month:b.month+1,monthname:b.options.displayMonthAbbr?b.options.monthabbrs[b.month]:b.options.months[b.month],year:b.year,weekday:d+b.options.startIn,weekdayname:b.options.weeks[d+b.options.startIn]};f.day&&b.options.onDayClick(c,e,f)})},_generateTemplate:function(b){var c=this._getHead(),d=this._getBody(),e;switch(this.rowTotal){case 4:e="fc-four-rows";break;case 5:e="fc-five-rows";break;case 6:e="fc-six-rows"}this.$cal=a('<div class="fc-calendar '+e+'">').append(c,d),this.$el.find("div.fc-calendar").remove().end().append(this.$cal),b&&b.call()},_getHead:function(){var a='<div class="fc-head">';for(var b=0;b<=6;b++){var c=b+this.options.startIn,d=c>6?c-6-1:c;a+="<div>",a+=this.options.displayWeekAbbr?this.options.weekabbrs[d]:this.options.weeks[d],a+="</div>"}return a+="</div>",a},_getBody:function(){var a=new Date(this.year,this.month+1,0),b=a.getDate(),c=new Date(this.year,this.month,1);this.startingDay=c.getDay();var d='<div class="fc-body"><div class="fc-row">',e=1;for(var f=0;f<7;f++){for(var g=0;g<=6;g++){var h=this.startingDay-this.options.startIn,i=h<0?6+h+1:h,j="",k=this.month===this.today.getMonth()&&this.year===this.today.getFullYear()&&e===this.today.getDate(),l="";if(e<=b&&(f>0||g>=i)){j+='<span class="fc-date">'+e+'</span><span class="fc-weekday">'+this.options.weekabbrs[g+this.options.startIn>6?g+this.options.startIn-6-1:g+this.options.startIn]+"</span>";var m=(this.month+1<10?"0"+(this.month+1):this.month+1)+"-"+(e<10?"0"+e:e)+"-"+this.year,n=this.caldata[m];n&&(l=n),l!==""&&(j+="<div>"+l+"</div>"),++e}else k=!1;var o=k?"fc-today ":"";l!==""&&(o+="fc-content"),d+=o!==""?'<div class="'+o+'">':"<div>",d+=j,d+="</div>"}if(e>b){this.rowTotal=f+1;break}d+='</div><div class="fc-row">'}return d+="</div></div>",d},_isValidDate:function(a){a=a.replace(/-/gi,"");var b=parseInt(a.substring(0,2),10),c=parseInt(a.substring(2,4),10),d=parseInt(a.substring(4,8),10);return b<1||b>12?!1:c<1||c>31?!1:(b==4||b==6||b==9||b==11)&&c>30?!1:b==2&&(d%400==0||d%4==0)&&d%100!=0&&c>29?!1:b==2&&d%100==0&&c>29?!1:{day:c,month:b,year:d}},_move:function(a,b,c){b==="previous"?a==="month"?(this.year=this.month>0?this.year:--this.year,this.month=this.month>0?--this.month:11):a==="year"&&(this.year=--this.year):b==="next"&&(a==="month"?(this.year=this.month<11?this.year:++this.year,this.month=this.month<11?++this.month:0):a==="year"&&(this.year=++this.year)),this._generateTemplate(c)},getYear:function(){return this.year},getMonth:function(){return this.month+1},getMonthName:function(){return this.options.displayMonthAbbr?this.options.monthabbrs[this.month]:this.options.months[this.month]},getCell:function(a){var b=Math.floor((a+this.startingDay-this.options.startIn)/7),c=a+this.startingDay-this.options.startIn-b*7-1;return this.$cal.find("div.fc-body").children("div.fc-row").eq(b).children("div").eq(c).children("div")},setData:function(b){b=b||{},a.extend(this.caldata,b),this._generateTemplate()},gotoNow:function(a){this.month=this.today.getMonth(),this.year=this.today.getFullYear(),this._generateTemplate(a)},"goto":function(a,b,c){this.month=a,this.year=b,this._generateTemplate(c)},gotoPreviousMonth:function(a){this._move("month","previous",a)},gotoPreviousYear:function(a){this._move("year","previous",a)},gotoNextMonth:function(a){this._move("month","next",a)},gotoNextYear:function(a){this._move("year","next",a)}};var d=function(a){b.console&&b.console.error(a)};a.fn.calendario=function(b){var c=a.data(this,"calendario");if(typeof b=="string"){var e=Array.prototype.slice.call(arguments,1);this.each(function(){if(!c){d("cannot call methods on calendario prior to initialization; attempted to call method '"+b+"'");return}if(!a.isFunction(c[b])||b.charAt(0)==="_"){d("no such method '"+b+"' for calendario instance");return}c[b].apply(c,e)})}else this.each(function(){c?c._init():c=a.data(this,"calendario",new a.Calendario(b,this))});return c}})(jQuery,window)
+// END CALENDARIO
+
+var fmtData;
+
+var $ = jQuery, cal, hscEl;
+
+function hsc(text) {
+	return hscEl.text(text).html();
+}
+
+function convertDate(date) {
+	var date = new Date(date).toISOString().split("T")[0].split("-").reverse();
+	var fDate = date[1] + "-" + date[0] + "-" + date[2];
+	return fDate;
+}
+
+function convertTime(time) {
+	var	dateO = new Date(time),
+		hours = (dateO.getHours() % 12) || 12,
+		ampm = (dateO.getHours() >= 12) ? "PM" : "AM",
+		premin = dateO.getMinutes() < 10 ? "0" : "",
+		min = dateO.getMinutes(),
+		time = hours + (min == 0 ? "" : (":" + premin + dateO.getMinutes())) + " " + ampm;
+	return (time == "12 AM" ? "" : time);
+}
+
+function convertData(data) {
+	var newData = {};
+	fmtData = data.DATA.map(function(datum) {
+		var fmtDatum = {};
+		datum.forEach(function(part,i) {
+			fmtDatum[data.COLUMNS[i].toLowerCase()] = part;
+		});
+		return fmtDatum;
+	});
+	fmtData.forEach(function(evt,i) {
+		var date = convertDate(evt.eventdate), time = convertTime(evt.eventdate);
+		var text = (time &&  "<time>" + time + "</time> ") + hsc(evt.title);
+		text = '<a href="#" data-index="' + i + '">' + text + "</a>";
+		if(!newData.hasOwnProperty(date)) newData[date] = "";
+		newData[date] += text;
+	});
+	return newData;
+}
+
+function updateMonthYear() {
+	$.getJSON("http://smgapps.bu.edu/smgnet/smgcalendarU/json.cfm?callback=?&month=" + cal.getMonth() + "&year=" + cal.getYear(),null,function(data) {
+		cal.setData(convertData(data));
+	});
+	$('#custom-month').html(cal.getMonthName());
+	$('#custom-year').html(cal.getYear());
+}
+function escapeICS(text) {
+	return text.replace(/(\\|;|,)/g,"\\$0").replace(/(\r\n|\r|\n|<br>|<p>)/g,"\\n")
+}
+function dateICS(text) {
+	return text.replace(/[:-]|\.[0-9]{3}/g,"");
+}
+function toISO(text) {
+	return new Date(text).toISOString();
+}
+function joinDateTime(datestr,timestr) {
+	return datestr.split("T")[0] + "T" + timestr.split("T")[1];
+}
+$("#calendar").on("click",".fc-calendar .fc-row > div > div a",function() {
+
+
+/*
+Got GCal/ICS per-event links working; now for whole-month
+*/
+	// First, get the data:
+	var data = fmtData[$(this).data("index")];
+
+	// Now, generate useful variables for GCal/ICS links:
+	var	date = dateICS(toISO(data.eventdate)),
+		doesEnd = (data.endtime != "January, 01 1900 00:00:00"),
+		dateEnd = dateICS(doesEnd ? joinDateTime(toISO(data.eventdate),toISO(data.endtime)) : date),
+		hasLink = (data.weblink !== "http://" && data.weblink),
+		msg = data.title + (data.message && (":\n" + data.message.replace(/<br>/g,"\n")))
+		+ (hasLink ? ("\nFor more info: " + data.weblink) : ""),
+		isAllDay = date.indexOf("T040000Z") > -1 && dateEnd.indexOf("T040000Z") > -1;
+
+	// Create the GCal link itself
+	var gcal = "http://www.google.com/calendar/event?action=TEMPLATE" + 
+		"&dates=" + (isAllDay?date.split("T")[0]:date)
+		+ "/" + (isAllDay?dateEnd.split("T")[0]:dateEnd) +
+		"&text=" + encodeURIComponent(data.title) +
+		"&details=" + encodeURIComponent(msg) +
+		(data.location && "&location=" + encodeURIComponent(data.location));
+
+	// Reformat dates for ICS
+	if(isAllDay) {
+		date = "DTSTART;VALUE=DATE:" + date.split("T")[0];
+		dateEnd = "DTEND;VALUE=DATE:" + date.split("T")[0];
+	} else {
+		date = "DTSTART:" + date;
+		dateEnd = "DTEND:" + dateEnd;
+	}
+
+	// Generate the ICS file
+	var ics = [
+		"BEGIN:VCALENDAR",
+		"PRODID:-//Microsoft Corporation//Outlook 12.0 MIMEDIR//EN",
+		"VERSION:2.0",
+		"METHOD:PUBLISH",
+		"BEGIN:VEVENT",date,dateEnd,
+		"SUMMARY:" + escapeICS(data.title),
+		data.location && ("LOCATION:" + escapeICS(data.location)),
+		"DESCRIPTION:" + escapeICS(msg),
+		hasLink ? "URL:" + escapeICS(data.weblink) : "",
+		"END:VEVENT","END:VCALENDAR"
+	].join("\n");
+
+	// Convert times and dates for the modal
+	var time = convertTime(data.eventdate);
+	date = data.eventdate.replace(",","").split(" ").slice(0,-1);
+date[1] += ",";
+if(date[1].indexOf("0") == 0) date[1] = date[1].slice(1);
+date = date.join(" ");
+dateEnd = convertTime(data.endtime);
+	// Setup the modal's contents
+	if(hasLink) {
+		$("#modal h1").html("<a></a>");
+		$("#modal h1 a").text(data.title);
+		$("#modal h1 a").attr("href",data.weblink);
+		$("#modal h1 a").attr("target","_blank");
+		
+	} else {
+		$("#modal h1").text(data.title);
+		
+	}
+$("#modal .link").attr("href","http://smgapps.bu.edu/smgnet/smgCalendarU/messageDetail.cfm?calid="+data.id+"&eventdateRe="+date);
+	$("#modal .gcallink").attr('href',gcal);
+	$("#modal .icslink").attr('href','data:text/calendar;charset=utf8,' + escape(ics));
+$("#modal .time").text(doesEnd ? (time + " - " + dateEnd): time);
+if(time) $("#modal .time").parent().show();
+else $("#modal .time").parent().hide();
+$("#modal .date").text(date);
+	$("#modal .loc").text(data.location || "");
+	$("#modal .message").html(data.message ? data.message.replace(/<br>/g,"</p><p>") : "");
+
+	// Actually show it
+	$("#modal,#close-modal").show();
+	return false;
+});
+
+$("body").on("click",":not(.fc-calendar .fc-row > div > div a, #modal, #modal *)",function() {
+	$("#modal,#close-modal").hide();
+});
+
+$("#modal .links a").on("click",function() { $("#modal,#close-modal").hide(); });
+
+$("#close-modal").click(function(){
+	$("#modal,#close-modal").hide();
+});
+
+$('#custom-next').click(function () { cal.gotoNextMonth(updateMonthYear); });
+$('#custom-prev').click(function () { cal.gotoPreviousMonth(updateMonthYear); });
+
+
+
+// https://www.google.com/calendar/render?cid=islcfpbthu89o4b7cggfh73hperc5tmc%40import.calendar.google.com
+//  http://smgapps.bu.edu/smgnet/smgCalendarU/smgCal/icsFiles/smgCal2.ics
+
+//http://smgapps.bu.edu/smgnet/smgCalendarU/smgCal/smgCalOutlook.cfm
+hscEl = $('<div/>'), cal = $('#calendar').calendario(); 
+updateMonthYear();
+
+// -->
+</script>
+[/pl_raw]
